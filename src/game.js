@@ -35,12 +35,15 @@ Game.prototype.players = function (player1, player2) {
 
 Game.prototype.play = function (location) {
   // console.log(this.allPlayers);
+  if (this.allPlayers[0].winner == true || this.allPlayers[1].winner == true) {
+    throw new Error("The Game is Over");
+  }
+
   if (this.board[location] !== null) {
     return this.board;
   }
 
   for (var player in this.allPlayers) {
-    // console.log(">>>>>" + this.allPlayers[player].name);
     if (this.allPlayers[player].turn) {
       this.board[location] = this.allPlayers[player].symbol
       this.allPlayers[player].turn = false;
@@ -77,16 +80,6 @@ Game.prototype.hasWon = function () {
     return null;
   }
 };
-
-
-
-
-
-// var newGame = new Game();
-// var players = newGame.players("Mario", "Luigi");
-// console.log(players[0].name);
-
-
 
 
 
