@@ -17,7 +17,9 @@ describe('Game', function() {
       var newGame = new Game();
       var gamePlayers = newGame.players("Mario","Luigi");
       expect(gamePlayers[0].name).toEqual("Mario");
-      expect(gamePlayers[1].name).toEqual("Luigi")
+      expect(gamePlayers[1].name).toEqual("Luigi");
+      expect(gamePlayers[0].symbol).toEqual("X");
+      expect(gamePlayers[1].symbol).toEqual("O");
     });//close it
   }); //close describe players
 
