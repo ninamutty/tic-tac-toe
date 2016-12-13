@@ -13,8 +13,27 @@ var Game = function() {
     8: null,
     9: null
   },
-  this.allPlayers = []
-}
+  this.allPlayers = [],
+  this.display = function() {
+    var displayString = ""
+    for (var i=1; i<10; i++) {
+      if (this.board[i] == null) {
+        displayString += "   ";
+      } else {
+        displayString +=  " " + this.board[i] + " " ;
+      }
+
+      if (i%3 !== 0) {
+        displayString += "|";
+      } else if (i == 9) {
+        displayString += "\n\n";
+      } else {
+        displayString += "\n-----------\n"
+      }
+    }
+    return displayString
+  } //end this.display
+}; //end contructor
 
 Game.prototype.players = function (player1, player2) {
   var p1 = new Player();
@@ -55,6 +74,7 @@ Game.prototype.play = function (location) {
       this.allPlayers[player].turn = true;
     }
   }
+  console.log(this.display());
   return this.board;
 };
 
