@@ -75,6 +75,16 @@ Game.prototype.play = function (location) {
     }
   }
   console.log(this.display());
+  var nullSpacesLeft = false;
+  for (var i = 1; i < 10; i++) {
+    if (this.board[i] == null) {
+      nullSpacesLeft = true;
+    }
+  }
+
+  if (this.hasWon() == null && nullSpacesLeft == false) {
+    throw new Error("It's a tie! You both lose.")
+  }
   return this.board;
 };
 

@@ -110,6 +110,22 @@ describe('Game', function() {
       newGame.play(3); // player 1
 
       expect(function() {newGame.play(8)}).toThrow(new Error("The Game is Over"))
+    });
+
+    it('should detect a tie', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(1); // player 1
+      newGame.play(2); // player 2
+      newGame.play(5); // player 1
+      newGame.play(3); // player 2
+      newGame.play(6); // player 1
+      newGame.play(4); // player 2
+      newGame.play(7); // player 1
+      newGame.play(9); // player 2
+
+      expect(function() {newGame.play(8)}).toThrow(new Error("It's a tie! You both lose."))
+
     })
   }); // close describe play
 
