@@ -35,6 +35,10 @@ Game.prototype.players = function (player1, player2) {
 
 Game.prototype.play = function (location) {
   // console.log(this.allPlayers);
+  if (this.board[location] !== null) {
+    return this.board;
+  }
+
   for (var player in this.allPlayers) {
     // console.log(">>>>>" + this.allPlayers[player].name);
     if (this.allPlayers[player].turn) {

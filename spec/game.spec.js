@@ -44,9 +44,46 @@ describe('Game', function() {
       newGame.play(3);
       expect(newGame.allPlayers[0].turn).toEqual(false);
       expect(newGame.allPlayers[1].turn).toEqual(true);
+    });
+
+    it('should change the board with the play', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(3);
+      expect(newGame.board[3]).toEqual("X");
+      for (var i=1; i < 10; i++) {
+        if (i !== 3) {
+          expect(newGame.board[i]).toEqual(null);
+        }
+      };
+    });
+
+    it('should can track multiple players plays', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(3);
+      newGame.play(5);
+
+      expect(newGame.board[3]).toEqual("X");
+      expect(newGame.board[5]).toEqual("O");
+      for (var i=1; i < 10; i++) {
+        if (i !== 3 && i !== 5) {
+          expect(newGame.board[i]).toEqual(null);
+        }
+      };
+    });
+
+    it('should not let a player play a taken spot', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(3);
+      expect(newGame.board[3]).toEqual("X");
+      newGame.play(3);
+      expect(newGame.board[3]).toEqual("X");
+
+      expect(newGame.allPlayers[0].turn).toEqual(false);
+      expect(newGame.allPlayers[1].turn).toEqual(true);
     })
-
-
   }); // close describe play
 
 
