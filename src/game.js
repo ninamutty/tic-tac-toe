@@ -44,6 +44,10 @@ Game.prototype.play = function (location) {
     if (this.allPlayers[player].turn) {
       this.board[location] = this.allPlayers[player].symbol
       this.allPlayers[player].turn = false;
+      if (this.hasWon() == this.allPlayers[player].symbol) {
+        this.allPlayers[player].winner = true;
+        break;
+      }
     } else {
       this.allPlayers[player].turn = true;
     }
@@ -51,12 +55,36 @@ Game.prototype.play = function (location) {
   return this.board;
 };
 
+Game.prototype.hasWon = function () {
+  var b = this.board;
+  if (b[1] == b[4] && b[7] == b[4] && b[4] !== null) {
+    return b[1]
+  } else if (b[2] == b[5] && b[8] == b[5] && b[5] !== null) {
+    return b[2]
+  } else if (b[3] == b[6] && b[9] == b[6] && b[6] !== null) {
+    return b[3]
+  } else if (b[1] == b[2] && b[3] == b[2] && b[2] !== null) {
+    return b[1]
+  } else if (b[4] == b[6] && b[5] == b[6] && b[6] !== null) {
+    return b[4]
+  } else if (b[7] == b[8] && b[9] == b[8] && b[8] !== null) {
+    return b[7]
+  } else if (b[1] == b[5] && b[9] == b[5] && b[5] !== null) {
+    return b[1]
+  } else if (b[3] == b[5] && b[7] == b[5] && b[5] !== null) {
+    return b[3]
+  } else {
+    return null;
+  }
+};
+
+
+
+
+
 // var newGame = new Game();
 // var players = newGame.players("Mario", "Luigi");
 // console.log(players[0].name);
-
-
-
 
 
 

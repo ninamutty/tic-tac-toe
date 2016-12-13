@@ -83,8 +83,34 @@ describe('Game', function() {
 
       expect(newGame.allPlayers[0].turn).toEqual(false);
       expect(newGame.allPlayers[1].turn).toEqual(true);
-    })
+    });
+
+    // it ('should')
   }); // close describe play
 
+  describe('hasWon', function() {
+    it('should return a symbol for the winner', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(1); // player 1
+      newGame.play(3); // player 2
+      newGame.play(9); // player 1
+      newGame.play(5); // player 2
+      newGame.play(7); // player 1
+      newGame.play(8); // player 2
+      newGame.play(4); // player 1
+
+      expect(newGame.hasWon()).toEqual(newGame.allPlayers[0].symbol);
+    });
+
+    it('should return a symbol for the winner', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(1); // player 1
+      newGame.play(3); // player 2
+
+      expect(newGame.hasWon()).toEqual(null);
+    });
+  }); //ending describe hasWon
 
 });// close describe Game class
