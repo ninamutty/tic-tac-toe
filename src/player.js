@@ -2,6 +2,7 @@
 
 var Player = function() {
   this.symbol = null;
+  this.turn = false;
 }
 
 Player.prototype.name = function (name) {
@@ -13,4 +14,4 @@ Player.prototype.name = function (name) {
 // };
 
 
-module.exports = Player;
+export default Player;

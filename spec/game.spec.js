@@ -21,6 +21,33 @@ describe('Game', function() {
       expect(gamePlayers[0].symbol).toEqual("X");
       expect(gamePlayers[1].symbol).toEqual("O");
     });//close it
+
+    it('should start on player one turn', function() {
+      var newGame = new Game();
+      var gamePlayers = newGame.players("Mario","Luigi");
+      expect(gamePlayers[0].turn).toEqual(true);
+      expect(gamePlayers[1].turn).toEqual(false);
+    });
+
+    it('should have two player', function() {
+      var newGame = new Game();
+      var gamePlayers = newGame.players("Mario","Luigi");
+      expect(gamePlayers.length).toEqual(2);
+    })
   }); //close describe players
+
+
+  describe('play', function() {
+    it('should switch players turns', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.play(3);
+      expect(newGame.allPlayers[0].turn).toEqual(false);
+      expect(newGame.allPlayers[1].turn).toEqual(true);
+    })
+
+
+  }); // close describe play
+
 
 });// close describe Game class
