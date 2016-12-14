@@ -5,12 +5,18 @@ describe('Game', function() {
   describe('newGame', function() {
     it('should start a new game with an empty board', function() {
       var game = new Game();
-      var emptyBoard = Game.board;
+      var emptyBoard = game.board;
       for (var key in emptyBoard) {
-        expect(emptyBoard[key]).toBeNull()
+        expect(emptyBoard[key]).toBeNull();
       }
     }); //close it
+
+    it('should have a board with 9 spaces', function() {
+      var game = new Game();
+      expect(Object.keys(game.board).length).toEqual(9);
+    }); //close it
   }); //close describe newGame function
+
 
   describe('players', function() {
     it('should assign two players', function() {
@@ -33,6 +39,14 @@ describe('Game', function() {
       var newGame = new Game();
       var gamePlayers = newGame.players("Mario","Luigi");
       expect(gamePlayers.length).toEqual(2);
+    })
+
+    it('should not be able to reset players', function() {
+      var newGame = new Game();
+      newGame.players("Mario","Luigi");
+      newGame.players("Peach","Bowser");
+      expect(newGame.allPlayers[0].name).toEqual("Mario");
+      expect(newGame.allPlayers[1].name).toEqual("Luigi");
     })
   }); //close describe players
 
@@ -109,7 +123,7 @@ describe('Game', function() {
       newGame.play(5); // player 2
       newGame.play(3); // player 1
 
-      expect(function() {newGame.play(8)}).toThrow(new Error("The Game is Over"))
+      expect(function() {newGame.play(8)}).toThrow(new Error("The Game is Over"));
     });
 
     it('should detect a tie', function() {
@@ -124,7 +138,7 @@ describe('Game', function() {
       newGame.play(7); // player 1
       newGame.play(9); // player 2
 
-      expect(function() {newGame.play(8)}).toThrow(new Error("It's a tie! You both lose."))
+      expect(function() {newGame.play(8)}).toThrow(new Error("It's a tie! You both lose."));
 
     })
   }); // close describe play

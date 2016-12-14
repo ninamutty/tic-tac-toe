@@ -36,17 +36,19 @@ var Game = function() {
 }; //end contructor
 
 Game.prototype.players = function (player1, player2) {
-  var p1 = new Player();
-  p1.name = player1;
-  p1.symbol = "X";
-  p1.turn = true;
+  if (this.allPlayers.length == 0) {
+    var p1 = new Player();
+    p1.name = player1;
+    p1.symbol = "X";
+    p1.turn = true; 
 
-  var p2 = new Player();
-  p2.name = player2;
-  p2.symbol = "O";
-  p2.turn = false;
+    var p2 = new Player();
+    p2.name = player2;
+    p2.symbol = "O";
+    p2.turn = false;  
 
-  this.allPlayers = [p1,p2]
+    this.allPlayers = [p1,p2]
+  }
   return this.allPlayers
 }; //close players
 
@@ -90,27 +92,16 @@ Game.prototype.play = function (location) {
 
 Game.prototype.hasWon = function () {
   var b = this.board;
-  if (b[1] == b[4] && b[7] == b[4] && b[4] !== null) {
-    return b[1]
-  } else if (b[2] == b[5] && b[8] == b[5] && b[5] !== null) {
-    return b[2]
-  } else if (b[3] == b[6] && b[9] == b[6] && b[6] !== null) {
-    return b[3]
-  } else if (b[1] == b[2] && b[3] == b[2] && b[2] !== null) {
-    return b[1]
-  } else if (b[4] == b[6] && b[5] == b[6] && b[6] !== null) {
-    return b[4]
-  } else if (b[7] == b[8] && b[9] == b[8] && b[8] !== null) {
-    return b[7]
-  } else if (b[1] == b[5] && b[9] == b[5] && b[5] !== null) {
-    return b[1]
-  } else if (b[3] == b[5] && b[7] == b[5] && b[5] !== null) {
-    return b[3]
-  } else {
-    return null;
-  }
-};
+  var winningSolutions = [[1,4,7], [2,5,8], [3,6,9], [1,2,3], [4,5,6], [7,8,9], [1,5,9], [3,5,7]];
 
+  var answer = null;
+  for (var i=0; i < winningSolutions.length; i++) {
+    if (b[winningSolutions[i][0]] == b[winningSolutions[i][1]] && b[winningSolutions[i][2]] == b[winningSolutions[i][1]] && b[winningSolutions[i][1]] !== null) {
+      answer = b[winningSolutions[i][0]]
+    }
+  }
+  return answer
+};
 
 
 export default Game;
