@@ -108,7 +108,9 @@ describe('Game', function() {
       newGame.play(5); // player 2
 
       expect(newGame.allPlayers[0].winner).toEqual(false);
-      newGame.play(3); // player 1
+      // newGame.play(3); // player 1
+
+      expect(function() {newGame.play(3)}).toThrow(new Error("The Game is Over"));
       expect(newGame.allPlayers[0].winner).toEqual(true);
       expect(newGame.allPlayers[1].winner).toEqual(false);
 
@@ -121,9 +123,8 @@ describe('Game', function() {
       newGame.play(4); // player 2
       newGame.play(2); // player 1
       newGame.play(5); // player 2
-      newGame.play(3); // player 1
 
-      expect(function() {newGame.play(8)}).toThrow(new Error("The Game is Over"));
+      expect(function() {newGame.play(3)}).toThrow(new Error("The Game is Over"));
     });
 
     it('should detect a tie', function() {
@@ -137,6 +138,7 @@ describe('Game', function() {
       newGame.play(4); // player 2
       newGame.play(7); // player 1
       newGame.play(9); // player 2
+
 
       expect(function() {newGame.play(8)}).toThrow(new Error("It's a tie! You both lose."));
 
@@ -153,12 +155,12 @@ describe('Game', function() {
       newGame.play(5); // player 2
       newGame.play(7); // player 1
       newGame.play(8); // player 2
-      newGame.play(4); // player 1
 
+      expect(function() {newGame.play(4)}).toThrow(new Error("The Game is Over"));
       expect(newGame.hasWon()).toEqual(newGame.allPlayers[0].symbol);
     });
 
-    it('should return a symbol for the winner', function() {
+    it('should return null for no winner', function() {
       var newGame = new Game();
       newGame.players("Mario","Luigi");
       newGame.play(1); // player 1

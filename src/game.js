@@ -1,5 +1,12 @@
 //game.js
-import Player from 'player'
+// import Player from 'player'
+
+var Player = function() {
+  this.symbol = null;
+  this.turn = false;
+  this.winner = false;
+  this.name = "";
+}
 
 var Game = function() {
   this.board = {
@@ -40,15 +47,16 @@ Game.prototype.players = function (player1, player2) {
     var p1 = new Player();
     p1.name = player1;
     p1.symbol = "X";
-    p1.turn = true; 
+    p1.turn = true;
 
     var p2 = new Player();
     p2.name = player2;
     p2.symbol = "O";
-    p2.turn = false;  
+    p2.turn = false;
 
     this.allPlayers = [p1,p2]
   }
+    // console.log(this);
   return this.allPlayers
 }; //close players
 
@@ -56,11 +64,12 @@ Game.prototype.players = function (player1, player2) {
 
 Game.prototype.play = function (location) {
   // console.log(this.allPlayers);
-  if (this.allPlayers[0].winner == true || this.allPlayers[1].winner == true) {
-    throw new Error("The Game is Over");
-  }
+  // if (this.allPlayers[0].winner == true || this.allPlayers[1].winner == true) {
+  //   throw new Error("The Game is Over");
+  // }
 
   if (this.board[location] !== null) {
+    console.log("nope, that space is taken");
     return this.board;
   }
 
@@ -70,7 +79,9 @@ Game.prototype.play = function (location) {
       this.allPlayers[player].turn = false;
       if (this.hasWon() == this.allPlayers[player].symbol) {
         this.allPlayers[player].winner = true;
-        break;
+        console.log(this.display());
+        throw new Error("The Game is Over");
+        // break;
       }
     } else {
       this.allPlayers[player].turn = true;
@@ -103,5 +114,59 @@ Game.prototype.hasWon = function () {
   return answer
 };
 
+'use strict';
+var prompt = require('prompt');
+prompt.start();
 
-export default Game;
+Game.prototype.playingGame = function () {
+  var that = this;
+
+    prompt.get(["Player 1 name", "Player 2 name"], playerNames);
+
+    function playerNames(error, result) {
+      that.players(result['Player 1 name'],result['Player 2 name']);
+
+      // for (var i = 0; i < 9; i++) {
+        prompt.get(["Your move"], letsPlay);
+        // i = 0;
+        function letsPlay(error, result) {
+          var nullSpacesLeft = false;
+          for (var i = 1; i < 10; i++) {
+            if (that.board[i] == null) {
+              nullSpacesLeft = true;
+            }
+          }
+          if (that.hasWon() == null && nullSpacesLeft == false) {
+            throw new Error("It's a tie! You both lose.")
+          }
+
+          if ( that.board[result['Your move']] == null ) {
+            that.play(result['Your move']);
+
+            prompt.get(["Your move"], letsPlay);
+
+          } else {
+            prompt.get(["Your move"], letsPlay);
+          }
+
+
+        }//close letsPlay function
+      // }//close for loop
+
+    }//close playerNames function
+
+
+  // do {
+  //   console.log("before play");
+  //   this.play(2);
+  //   console.log("after a play");
+  //   i ++
+  // } while (i < 3)
+};
+
+
+var newGame = new Game();
+newGame.playingGame();
+
+
+// export default Game;
