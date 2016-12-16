@@ -3,8 +3,46 @@
   <head>
     <title>Tic-Tac-Toe</title>
     <meta charset="utf-8">
-  </head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">  </head>
   <body>
+    <h1> TIC-TAC-TOE </h1>
+
+    <form class="row player-form">
+      <h3>Add A New Player</h3>
+      <label>
+        Name
+        <input type="text" name="name">
+      </label>
+      <button type="submit" class="button btn-save">Save</button>
+      <button type="button" class="button btn-cancel">Cancel</button>
+    </form>
+
+
+    <div id="player1-name"></div>
+    <div id="player2-name"></div>
+
+
+    <div><ul id="tictactoe-board" class="row">  </ul></div>
+
+    <!-- Underscore Templates -->
+    <script type="text/template" id="tictactoe-board">
+      <li class="board-space small-4 columns">
+        <h4><%- value %></h4>
+      </li>
+    </script>
+
+    <script type="text/template" id="player1-name">
+      <h3><%- name %></h3>
+    </script>
+
+    <script type="text/template" id="player2-name">
+      <h3><%- name %></h3>
+    </script>
+
+    <!-- Entire JS project built by Webpack -->
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>
