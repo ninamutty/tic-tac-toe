@@ -6,26 +6,42 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/app.css">  </head>
-  <body>
-    <h1> TIC-TAC-TOE </h1>
+    <link rel="stylesheet" href="css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Bangers|Hanalei|Passero+One|Unica+One|Vampiro+One|Open+Sans+Condensed:300|Monoton" rel="stylesheet">
+  </head>
+  <body id="game">
+    <h1 id="header"><a href="#"> TIC-TAC-GLOW </a></h1>
 
-    <form class="row player-form">
-      <h3>Add A New Player</h3>
-      <label>
-        Name
-        <input type="text" name="name">
-      </label>
-      <button type="submit" class="button btn-save">Save</button>
-      <button type="button" class="button btn-cancel">Cancel</button>
-    </form>
+    <main class="row">
+      <div class="columns small-12 medium-12 large-4 player-stuff">
+        <form class="row player-form">
+          <h4>ADD A PLAYER</h4>
+          <label>
+            <input type="text" name="name" placeholder="Name">
+          </label>
+          <button type="submit" class="button hollow btn-save">Save</button>
+          <button type="button" class="button hollow btn-cancel">Cancel</button>
+        </form>
 
 
-    <div id="player1-name"></div>
-    <div id="player2-name"></div>
+        <h2 id="player1-name">P1: Tarzan</h2>
+        <h2 id="player2-name">P2: Jane</h2>
+      </div>
 
 
-    <div><ul id="tictactoe-board" class="row">  </ul></div>
+      <div class="board-div columns small-12 medium-12 large-7"><ul id="tictactoe-board" class="row">
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+        <li class="board-space"></li>
+      </ul></div>
+    </main>
+
 
     <!-- Underscore Templates -->
     <script type="text/template" id="tictactoe-board">

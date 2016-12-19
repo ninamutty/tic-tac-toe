@@ -10,4 +10,10 @@ import Board from 'app/collections/board';
 
 
 $(document).ready(function() {
+  // var board = new Board(contactData);
+  var game = new GameView({
+    el: $('#game'),
+    // model: contactList
+  });
+  application.render();
 }); //end document.ready
