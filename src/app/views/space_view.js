@@ -19,6 +19,8 @@ const SpaceView = Backbone.View.extend({
 
   clickSpace: function() {
     console.log('clickSpace');
+    this.trigger('select', this);
+    return false;
   }
 
 }); //end SpaceView
