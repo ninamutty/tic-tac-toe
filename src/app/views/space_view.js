@@ -3,20 +3,22 @@ import Backbone from 'backbone';
 
 const SpaceView = Backbone.View.extend({
   initialize: function(options) {
-    this.value = null;
-    this.position = options.position
+    this.value = options.value;
+    this.position = options.position;
+    this.template = _.template(Backbone.$('#tmpl-tictactoe-board').html());
   },
 
   render: function() {
+    this.$el.html(this.template(this.model.attributes));
     return this;
   },
 
   events: {
-    'click .board-space': 'playSpace'
+    'click .board-space': 'clickSpace'
   },
 
-  playSpace: function() {
-    console.log('playSpace');
+  clickSpace: function() {
+    console.log('clickSpace');
   }
 
 }); //end SpaceView
