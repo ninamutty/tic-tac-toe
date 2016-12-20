@@ -17,14 +17,15 @@ const GameView = Backbone.View.extend({
   },
 
   render: function() {
-    const board = new BoardView({
+    this.board = new BoardView({
       model: this.model.get("board"),
       el: this.$('.board-div')
     });
-    this.listenTo(board, 'winner', this.winner);
-    this.listenTo(board, 'draw', this.draw);
+    this.listenTo(this.board, 'winner', this.winner);
+    this.listenTo(this.board, 'draw', this.draw);
 
-    board.render();
+    // console.log((this.board.model).find({index: 4}).get("value"));
+    this.board.render();
 
     return this;
   },
@@ -83,6 +84,8 @@ const GameView = Backbone.View.extend({
 
     /// send info to API
     /// add new game button that triggers a new game
+    var gameData = this.APIformat();
+    this.model.create(gameData);
   },
 
   draw: function(board) {
@@ -94,14 +97,23 @@ const GameView = Backbone.View.extend({
     /// add new game button that triggers a new game
   },
 
-  format: function() {
+  APIformat: function() {
     var gameComplete = {
       outcome: this.outcome,
       players: [this.model.get("allPlayers")[0].get("name"), this.model.get("allPlayers")[1].get("name")],
-      board: 
+      board: [
+        (this.board.model).find({index: 0}).get("value"),
+        (this.board.model).find({index: 1}).get("value"),
+        (this.board.model).find({index: 2}).get("value"),
+        (this.board.model).find({index: 3}).get("value"),
+        (this.board.model).find({index: 4}).get("value"),
+        (this.board.model).find({index: 5}).get("value"),
+        (this.board.model).find({index: 6}).get("value"),
+        (this.board.model).find({index: 7}).get("value"),
+        (this.board.model).find({index: 8}).get("value")
+      ]
     };
-    return task;
-
+    return gameComplete;
   },
 
   callNew: function(e) {
