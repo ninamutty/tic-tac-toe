@@ -33,6 +33,7 @@ const BoardView = Backbone.View.extend({
 
   playSpace: function(space) {
     console.log("playSpace");
+    var that = this;
     if (space.model.get("value") !== " ") {
       return this;
     } else {
@@ -45,7 +46,15 @@ const BoardView = Backbone.View.extend({
       }
 
       if (this.hasWon() == "X" || this.hasWon() == "O") {
+        this.model.forEach(function(space) {
+          if (space.get("value") == that.hasWon()) {
+            console.log("true!");
+            $('.board-space').addClass("winner-glow");
+          }
+        });
+
         this.trigger("winner", this);
+
       } else if (this.movesPlayed >= 9) {
         this.trigger("draw", this);
       }
@@ -66,7 +75,7 @@ const BoardView = Backbone.View.extend({
       if(b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][2]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][0]}).get("value") !== null) {
         answer = b.find({index: winningSolutions[i][0]}).get("value");
 
-        // $(b.find({index: winningSolutions[i][0]})).addClass("winning-glow");
+        $(b.find({index: winningSolutions[i][0]})).html("winning-glow");
       }
     }
     return answer
