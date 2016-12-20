@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import BoardView from 'app/views/board_view';
 import Player from 'app/models/player';
+import Game from 'app/models/game';
 
 const GameView = Backbone.View.extend({
   initialize: function() {
@@ -31,7 +32,10 @@ const GameView = Backbone.View.extend({
   events: {
     'submit .player-form': 'createPlayer',
     'click .btn-cancel': 'cancelInput',
+    'click .btn-new-game': 'callNew'
+    // function(ev) { newGame.call(this, ev); }
   }, // end events
+
 
   createPlayer: function(e) {
     e.preventDefault();
@@ -49,7 +53,7 @@ const GameView = Backbone.View.extend({
         $('#player2-name').html(this.model.get("allPlayers")[1].get("name"));
       }
     } else {
-      console.log("Two Players");
+      console.log("There are Two Players Already");
     }
     this.cancelInput();
   },
@@ -69,11 +73,44 @@ const GameView = Backbone.View.extend({
 
   winner: function(board) {
     console.log("WINNER");
+    this.outcome = board.hasWon();
+    if (this.outcome == "X") {
+      this.$("#modalText").html("We Have a Winner! Congratulations " + this.model.get("allPlayers")[0].get("name") + "!!");
+    } else {
+      this.$("#modalText").html("We Have a Winner! Congratulations " + this.model.get("allPlayers")[1].get("name") + "!!");
+    }
+    this.$("#myModal").show();
 
+    /// send info to API
+    /// add new game button that triggers a new game
   },
 
   draw: function(board) {
     console.log("TIE");
+    this.outcome = "draw";
+    this.$("#modalText").html("We Have a Tie! You're both losers!");
+    this.$("#myModal").show();
+    /// send info to API
+    /// add new game button that triggers a new game
+  },
+
+  format: function() {
+    var gameComplete = {
+      outcome: this.outcome,
+      players: [this.model.get("allPlayers")[0].get("name"), this.model.get("allPlayers")[1].get("name")],
+      board: 
+    };
+    return task;
+
+  },
+
+  callNew: function(e) {
+    e.preventDefault();
+    this.allPlayers = [];
+    this.$("#player1-name").html("");
+    this.$("#player2-name").html("");
+    this.$("#myModal").hide();
+    newGame.call();
   }
 
 }); //end GameView
@@ -84,24 +121,43 @@ export default GameView;
 
 
 
+var newGame = function() {
+  // e.preventDefault();
+  console.log("newGame");
 
+  var game = new Game({
+    spaces: [{
+      value: ' ',
+      index: 0,
+    }, {
+      value: ' ',
+      index: 1,
+    }, {
+      value: ' ',
+      index: 2,
+    }, {
+      value: ' ',
+      index: 3,
+    }, {
+      value: ' ',
+      index: 4,
+    }, {
+      value: ' ',
+      index: 5,
+    }, {
+      value: ' ',
+      index: 6,
+    }, {
+      value: ' ',
+      index: 7,
+    }, {
+      value: ' ',
+      index: 8,
+    }]
+  }); // end game
 
-
-
-
-
-
-//
-// render: function() {
-//   // console.log(">>> BREADCRUMBS: 2");
-//
-//   const tripsView = new TripListView({
-//     //check that .tripList is right
-//     model: this.model.tripsList,
-//     el: this.$('#tictactoe-board')
-//   })
-//   tripsView.render();
-//
-//   // console.log(">>> BREADCRUMBS: Last");
-//   return this;
-// }
+  var gameView = new GameView({
+    el: $('#game'),
+    model: game
+  });
+}

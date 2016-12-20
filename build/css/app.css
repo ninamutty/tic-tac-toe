@@ -41,13 +41,17 @@ h1#header a:hover {
 
 
 main {
-  margin-top: 3%;
+  width: 80%;
+  margin: auto;
+  padding-top: 5%;
+  padding-left: 5%;
 }
 
-#player1-name {margin-top: 15%;}
+#player1-name {margin-top: 25%;}
 #player1-name, #player2-name {
   text-align: center;
   text-transform: uppercase;
+  z-index: 1;
 }
 
 
@@ -55,6 +59,7 @@ ul {
   list-style: none;
   text-align: center;
   width: 80%;
+  z-index: 1;
 }
 
 li.board-space {
@@ -66,6 +71,13 @@ li.board-space {
   color: white;
   position: relative;
   text-align: center;
+  z-index: 1;
+}
+
+li.board-space h4 {
+  font-size: 5rem;
+  padding-top: 15%;
+  font-family: 'Monoton', sans-serif;
 }
 
 .winner-glow {
@@ -85,6 +97,7 @@ button.button.hollow {
   color: #B6FF00;
   border: 1px solid #B6FF00;
   margin: 0 2%;
+  z-index: 1;
 }
 
 button.button.hollow:hover {
@@ -96,6 +109,39 @@ button.button.hollow:hover {
   animation: neon4 1.5s ease-in-out infinite alternate;
 }
 
+
+#myModal {
+  display: none;
+  width: 70vw;
+  height: 60vh;
+  position: fixed;
+  text-align: center;
+  top: 27%;
+  z-index: 10;
+  background-color: black;
+  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+  animation: neon2 1.5s ease-in-out infinite alternate;
+}
+
+#modalText {
+  position: relative;
+  text-align: center;
+  padding-top: 13%;
+  margin-bottom: 7%;
+  font-size: 4rem;
+  text-transform: uppercase;
+  /*-webkit-animation: neon3 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon3 1.5s ease-in-out infinite alternate;
+  animation: neon3 1.5s ease-in-out infinite alternate;*/
+}
+
+.btn-new-game {
+  margin-top: 35%;
+  text-align: center;
+  margin-left: 45%;
+
+}
 
 
 @-webkit-keyframes neon1 {

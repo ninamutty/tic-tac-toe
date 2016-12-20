@@ -46,15 +46,7 @@ const BoardView = Backbone.View.extend({
       }
 
       if (this.hasWon() == "X" || this.hasWon() == "O") {
-        this.model.forEach(function(space) {
-          if (space.get("value") == that.hasWon()) {
-            console.log("true!");
-            $('.board-space').addClass("winner-glow");
-          }
-        });
-
         this.trigger("winner", this);
-
       } else if (this.movesPlayed >= 9) {
         this.trigger("draw", this);
       }
@@ -68,56 +60,17 @@ const BoardView = Backbone.View.extend({
   hasWon: function () {
     var b = this.model;
     // console.log(this);
-    var winningSolutions = [[0,3,6], [1,4,7], [2,5,8], [0,1,2], [3,4,5], [6,7,8], [0,4,8], [2,4,6]];
+    var winningSolutions = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [2,4,6], [0,4,8]]
 
     var answer = null;
     for (var i=0; i < winningSolutions.length; i++) {
-      if(b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][2]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][0]}).get("value") !== null) {
+      if((b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value")) && (b.find({index: winningSolutions[i][2]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value")) && (b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][2]}).get("value") )&& (b.find({index: winningSolutions[i][0]}).get("value") !== null)) {
         answer = b.find({index: winningSolutions[i][0]}).get("value");
-
-        $(b.find({index: winningSolutions[i][0]})).html("winning-glow");
+        return answer;
       }
     }
-    return answer
   }
 
 }); //end BoardView
 
 export default BoardView;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// render: function() {
-//   console.log(">>> BREADCRUMBS: 4");
-//   const cardList = Backbone.$('#trip-cards');
-//   cardList.empty();
-//
-//   const self = this;
-//   this.model.forEach(function(trip) {
-//     const card = new TripView({
-//       model: trip
-//     });
-//     self.listenTo(card, 'select', self.showDetails);
-//
-//     cardList.append(card.render().$el);
-//   })
-//   console.log(">>> BREADCRUMBS: 2nd to last");
-//   return this;
-// }
