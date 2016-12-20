@@ -1,9 +1,12 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
 import SpaceView from 'app/views/space_view';
+import Space from 'app/models/space';
+
 
 const BoardView = Backbone.View.extend({
   initialize: function(){
+    this.movesPlayed = 0;
     this.listenTo(this.model, 'update', this.render);
   },
 
@@ -27,27 +30,38 @@ const BoardView = Backbone.View.extend({
 
   playSpace: function(space) {
     console.log("playSpace");
-
     if (space.model.get("value") !== " ") {
       return this;
     } else {
-      space.model.set("value", "X");
+      if (this.movesPlayed % 2 == 0) {
+        space.model.set("value", "X");
+        this.movesPlayed += 1;
+      } else {
+        space.model.set("value", "O");
+        this.movesPlayed += 1;
+      }
+
+      if (this.hasWon() == "X" || this.hasWon() == "O") {
+        this.trigger("winner", this);
+      } else if (this.movesPlayed >= 9) {
+        this.trigger("draw", this);
+      }
+
       space.render();
       return this;
     }
-
   },
 
 
-
   hasWon: function () {
-    var b = this;
+    var b = this.model;
+    // console.log(this);
     var winningSolutions = [[0,3,6], [1,4,7], [2,5,8], [0,1,2], [3,4,5], [6,7,8], [0,4,8], [2,4,6]];
 
     var answer = null;
     for (var i=0; i < winningSolutions.length; i++) {
-      if (b[winningSolutions[i][0]] == b[winningSolutions[i][1]] && b[winningSolutions[i][2]] == b[winningSolutions[i][1]] && b[winningSolutions[i][1]] !== null) {
-        answer = b[winningSolutions[i][0]]
+      if(b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][2]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][0]}).get("value") !== null) {
+        answer = b.find({index: winningSolutions[i][0]}).get("value")
       }
     }
     return answer

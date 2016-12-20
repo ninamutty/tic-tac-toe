@@ -16,17 +16,14 @@ const GameView = Backbone.View.extend({
   },
 
   render: function() {
-    // const playerView = new PlayerView({
-    //   model: this.model.get("allPlayers"),
-    //   el: this.$('.player-stuff')
-    // });
-    // playerView.render()
-
-    const gameBoardView = new BoardView({
+    const board = new BoardView({
       model: this.model.get("board"),
       el: this.$('.board-div')
     });
-    gameBoardView.render();
+    this.listenTo(board, 'winner', this.winner);
+    this.listenTo(board, 'draw', this.draw);
+
+    board.render();
 
     return this;
   },
@@ -57,7 +54,6 @@ const GameView = Backbone.View.extend({
     this.cancelInput();
   },
 
-
   getInput: function(event) {
     console.log("getInput");
     var player = {
@@ -69,6 +65,14 @@ const GameView = Backbone.View.extend({
   cancelInput: function() {
     console.log("cancelInput");
     this.input.name.val('');
+  }, //end cancelInput
+
+  winner: function(board) {
+    console.log("WINNER");
+  },
+
+  draw: function(board) {
+    console.log("TIE");
   }
 
 }); //end GameView
