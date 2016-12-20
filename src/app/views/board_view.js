@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Backbone from 'backbone';
 import SpaceView from 'app/views/space_view';
 import Space from 'app/models/space';
@@ -8,10 +9,12 @@ const BoardView = Backbone.View.extend({
   initialize: function(){
     this.movesPlayed = 0;
     this.listenTo(this.model, 'update', this.render);
+    this.boardSpaces = Backbone.$('#tictactoe-board');
+
   },
 
   render: function() {
-    const boardSpaces = Backbone.$('#tictactoe-board');
+    const boardSpaces = this.boardSpaces;
     boardSpaces.empty();
 
     const self = this;
@@ -61,7 +64,9 @@ const BoardView = Backbone.View.extend({
     var answer = null;
     for (var i=0; i < winningSolutions.length; i++) {
       if(b.find({index: winningSolutions[i][0]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][2]}).get("value") == b.find({index: winningSolutions[i][1]}).get("value") && b.find({index: winningSolutions[i][0]}).get("value") !== null) {
-        answer = b.find({index: winningSolutions[i][0]}).get("value")
+        answer = b.find({index: winningSolutions[i][0]}).get("value");
+
+        // $(b.find({index: winningSolutions[i][0]})).addClass("winning-glow");
       }
     }
     return answer

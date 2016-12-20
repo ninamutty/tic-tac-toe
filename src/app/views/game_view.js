@@ -69,6 +69,7 @@ const GameView = Backbone.View.extend({
 
   winner: function(board) {
     console.log("WINNER");
+
   },
 
   draw: function(board) {
