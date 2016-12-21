@@ -85,7 +85,6 @@ const GameView = Backbone.View.extend({
     /// send info to API
     /// add new game button that triggers a new game
     var gameData = this.APIformat();
-    console.log(gameData);
     this.model.save(gameData);
   },
 
@@ -96,7 +95,7 @@ const GameView = Backbone.View.extend({
     this.$("#myModal").show();
 
     var gameData = this.APIformat();
-    this.create(gameData);
+    this.model.save(gameData);
     /// send info to API
     /// add new game button that triggers a new game
   },
