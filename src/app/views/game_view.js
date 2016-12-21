@@ -83,7 +83,7 @@ const GameView = Backbone.View.extend({
       this.$("#modalText").html("We Have a Winner! Congratulations " + this.model.get("allPlayers")[1].get("name") + "!!");
     }
     this.$("#myModal").show();
-
+    $('#winAudio')[0].play();
     /// send info to API
     /// add new game button that triggers a new game
     var gameData = this.APIformat();
@@ -95,6 +95,7 @@ const GameView = Backbone.View.extend({
     this.outcome = "draw";
     this.$("#modalText").html("We Have a Tie! You're both losers!");
     this.$("#myModal").show();
+    $('#tieAudio')[0].play();
 
     var gameData = this.APIformat();
     this.model.save(gameData);
