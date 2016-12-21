@@ -80,13 +80,8 @@ li.board-space h4 {
   font-family: 'Monoton', sans-serif;
 }
 
-.winner-glow {
-  -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-  animation: neon2 1.5s ease-in-out infinite alternate;
-}
-
 li.board-space:hover {
+  z-index: 5;
   -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
   -moz-animation: neon2 1.5s ease-in-out infinite alternate;
   animation: neon2 1.5s ease-in-out infinite alternate;

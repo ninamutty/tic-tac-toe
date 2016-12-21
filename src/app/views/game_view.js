@@ -34,6 +34,8 @@ const GameView = Backbone.View.extend({
     'submit .player-form': 'createPlayer',
     'click .btn-cancel': 'cancelInput',
     'click .btn-new-game': 'callNew'
+
+    // 'callNew'
     // function(ev) { newGame.call(this, ev); }
   }, // end events
 
@@ -121,12 +123,13 @@ const GameView = Backbone.View.extend({
   },
 
   callNew: function(e) {
-    e.preventDefault();
-    this.allPlayers = [];
-    this.$("#player1-name").html("");
-    this.$("#player2-name").html("");
-    this.$("#myModal").hide();
-    newGame.call();
+    location.reload();
+    // e.preventDefault();
+    // this.allPlayers = [];
+    // this.$("#player1-name").html("");
+    // this.$("#player2-name").html("");
+    // this.$("#myModal").hide();
+    // newGame.call();
   }
 
 }); //end GameView
