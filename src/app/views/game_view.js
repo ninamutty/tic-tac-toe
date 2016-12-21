@@ -85,7 +85,8 @@ const GameView = Backbone.View.extend({
     /// send info to API
     /// add new game button that triggers a new game
     var gameData = this.APIformat();
-    this.model.create(gameData);
+    console.log(gameData);
+    this.model.save(gameData);
   },
 
   draw: function(board) {
@@ -93,6 +94,9 @@ const GameView = Backbone.View.extend({
     this.outcome = "draw";
     this.$("#modalText").html("We Have a Tie! You're both losers!");
     this.$("#myModal").show();
+
+    var gameData = this.APIformat();
+    this.create(gameData);
     /// send info to API
     /// add new game button that triggers a new game
   },
@@ -113,6 +117,7 @@ const GameView = Backbone.View.extend({
         (this.board.model).find({index: 8}).get("value")
       ]
     };
+    // console.log(gameComplete);
     return gameComplete;
   },
 

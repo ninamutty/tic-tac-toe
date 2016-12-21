@@ -7,15 +7,16 @@ const Game = Backbone.Model.extend({
     this.set("allPlayers", []);
     this.set("outcome", "");
 
-    // console.log(options.spaces);
     var spaces = options.spaces.map(function(attrs) {
       var space = new Space(attrs);
-      // console.log(space);
       return space;
     });
-    // console.log(spaces);
-
     this.set("board", new Board(spaces));
+  },
+
+  url: 'http://localhost:3000/api/v1/games',
+  parse: function(data) {
+    return data;
   }
 }); //end Game Model
 
