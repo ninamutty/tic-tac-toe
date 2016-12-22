@@ -40,12 +40,12 @@ Game.prototype.players = function (player1, player2) {
     var p1 = new Player();
     p1.name = player1;
     p1.symbol = "X";
-    p1.turn = true; 
+    p1.turn = true;
 
     var p2 = new Player();
     p2.name = player2;
     p2.symbol = "O";
-    p2.turn = false;  
+    p2.turn = false;
 
     this.allPlayers = [p1,p2]
   }
@@ -104,4 +104,4 @@ Game.prototype.hasWon = function () {
 };
 
 
-export default Game;
+// export default Game;

@@ -64,7 +64,7 @@ const GameView = Backbone.View.extend({
   getInput: function(event) {
     console.log("getInput");
     var player = {
-      name: this.input.name.val(),
+      name: this.input.name.val()
     }
     return player;
   }, // end getInput

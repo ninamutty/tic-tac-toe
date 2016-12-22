@@ -7,4 +7,4 @@ var Player = function() {
   this.name = "";
 }
 
-export default Player;
+// export default Player;
